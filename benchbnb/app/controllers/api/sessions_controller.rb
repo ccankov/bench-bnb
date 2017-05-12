@@ -3,17 +3,18 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by_credentials(user_params)
     if @user
       login(@user)
-      render template: "users/show"
+      render "api/users/show"
     else
-      render json: "Invalid credentials", status: 401
+      render json: ["Invalid credentials"], status: 401
     end
   end
 
   def destroy
-    if current_user
+    if logged_in?
+      logout
       render json: {}
     else
-      render json: "No logged in user", status: 404
+      render json: ["No logged in user"], status: 404
     end
   end
 
