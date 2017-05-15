@@ -4,7 +4,8 @@ import configureStore from './store/store';
 
 import Root from './components/root';
 
-import * as SessionActions from './actions/session_actions';
+import * as BenchActions from './actions/bench_actions';
+window.BenchActions = BenchActions;
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
