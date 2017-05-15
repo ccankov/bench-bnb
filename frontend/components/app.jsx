@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { AuthRoute } from '../util/route_util';
 import GreetingContainer from './greeting_container';
 import SessionFormContainer from './session/session_form_container';
-import BenchIndexContainer from './benches/bench_index_container';
+import SearchContainer from './search_container';
 
 const App = () => (
   <div>
@@ -14,7 +14,7 @@ const App = () => (
     </header>
     <AuthRoute path='/login' component={ SessionFormContainer } />
     <AuthRoute path='/signup' component={ SessionFormContainer } />
-    <Route exact path='/' component={ BenchIndexContainer } />
+    <Route exact path='/' component={ SearchContainer } />
   </div>
 );
 
