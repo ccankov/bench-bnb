@@ -8,15 +8,26 @@ export default class MarkerManager {
     this.markers[bench.id] = new window.google.maps.Marker({
       position: { lat: bench.lat, lng: bench.lng },
       map: this.map,
-      title: bench.description
+      title: bench.description,
+      id: bench.id
     });
   }
 
+  removeMarker(marker) {
+    this.markers[marker.id].setMap(null);
+    delete this.markers[marker.id];
+  }
+
   updateMarkers(benches) {
-    benches.forEach(bench => {
-      if (!this.markers[bench.id]) {
-        this.createMarkerFromBench(bench);
+    Object.keys(benches).forEach(benchId => {
+      if (!this.markers[benchId]) {
+        this.createMarkerFromBench(benches[benchId]);
       }
     });
+    Object.keys(this.markers).forEach((markerId => {
+      if (!benches[markerId]) {
+        this.removeMarker(this.markers[markerId]);
+      }
+    }).bind(this));
   }
 }
